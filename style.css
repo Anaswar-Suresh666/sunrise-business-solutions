@@ -200,8 +200,11 @@ body.nav-scrolled .top-bar { transform: translateY(-100%); }
     font-weight: 900; 
     letter-spacing: 3px; 
     font-family: 'Rockwell', 'Courier Bold', Courier, Georgia, serif; 
-    -webkit-text-stroke: 1.2px #441808; 
-    text-shadow: 0.5px 0.5px 0 #fff, -0.5px -0.5px 0 #fff, 0.5px -0.5px 0 #fff, -0.5px 0.5px 0 #fff;
+    -webkit-text-stroke: 1.5px #441808; /* Thicker brown core */
+    /* Stronger white outline using a slightly heavier shadow set */
+    text-shadow: 
+        1px 1px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff,
+        0px 1px 0 #fff, 0px -1px 0 #fff, 1px 0px 0 #fff, -1px 0px 0 #fff;
     text-transform: uppercase; 
 }
 .logo-text span { color: var(--white); font-size: 0.75rem; font-family: var(--font-body); letter-spacing: 2px; font-weight: 600; text-transform: uppercase; }
@@ -625,9 +628,13 @@ right:15px;
 }
 
 .splash-logo-container {
-    margin-bottom: 2rem;
     perspective: 1200px;
     z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    transform: translateY(40px); /* Shift entire group down for a better visual center */
 }
 
 .splash-logo-img {
@@ -652,45 +659,52 @@ right:15px;
     }
 }
 
+@media (max-width: 767px) {
+    .splash-logo-img { 
+        width: 100%;
+        max-width: 280px; 
+    }
+}
 @media (min-width: 768px) {
     .splash-logo-img { width: 550px; }
 }
 
 .splash-text {
     text-align: center;
-    line-height: 1.2;
-    opacity: 0;
+    line-height: 1.1;
     padding: 0 1rem;
-    animation: text-reveal 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.4s forwards;
+    margin-top: -4.5rem; /* Pull text very high into the logo silhouette */
+    transform-style: preserve-3d;
+    animation: logo-3d-reveal 2.2s cubic-bezier(0.1, 0.9, 0.2, 1) 0.3s forwards;
+    opacity: 0;
 }
 
 .splash-text strong {
     display: block;
-    color: #5C2F16; /* Rich, Premium Brown */
-    font-size: clamp(2.5rem, 8vw, 5rem);
-    letter-spacing: 5px;
-    font-family: 'Georgia', 'Times New Roman', serif;
+    color: #441808; /* Brand Brown */
+    font-size: clamp(2.5rem, 8vw, 5.5rem);
+    letter-spacing: 6px;
+    font-family: 'Rockwell', 'Courier Bold', Courier, Georgia, serif;
     font-weight: 900;
     line-height: 1.1;
-    /* Beautiful 3D CSS Extrusion Effect using only shades of brown */
+    /* Even more robust white outline for maximum clarity */
+    -webkit-text-stroke: 1.5px #441808;
     text-shadow: 
-        0px 1px 0px #4D2612,
-        0px 2px 0px #43210F,
-        0px 3px 0px #3A1C0D,
-        0px 4px 0px #30170A,
-        0px 5px 0px #271208,
-        0px 8px 25px rgba(35, 15, 6, 0.8);
+        1.5px 1.5px 0 #fff, -1.5px -1.5px 0 #fff, 1.5px -1.5px 0 #fff, -1.5px 1.5px 0 #fff,
+        0px 1.5px 0 #fff, 0px -1.5px 0 #fff, 1.5px 0px 0 #fff, -1.5px 0px 0 #fff;
+    text-transform: uppercase;
 }
 
 .splash-text span {
     display: block;
-    color: #411E0D; /* Slightly darker brown to complement */
+    color: var(--white);
     font-size: clamp(1rem, 3vw, 1.8rem);
-    font-family: 'Arial', sans-serif;
-    letter-spacing: 4px;
-    font-weight: 900;
-    margin-top: 14px;
-    text-shadow: 0px 2px 6px rgba(65, 30, 13, 0.4);
+    font-family: var(--font-body);
+    letter-spacing: 5px;
+    font-weight: 800;
+    margin-top: 10px;
+    text-transform: uppercase;
+    text-shadow: 0px 5px 15px rgba(0,0,0,0.8); /* Darker shadow for "BUSINESS SOLUTIONS" to pop */
 }
 
 @keyframes text-reveal {

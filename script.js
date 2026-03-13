@@ -138,10 +138,23 @@ document.addEventListener('DOMContentLoaded', () => {
         animate();
 
         // Handle Resize
+        const updateCameraPos = () => {
+            const width = window.innerWidth;
+            if (width < 480) {
+                camera.position.z = 60; // Pull back further for small phones
+            } else if (width < 768) {
+                camera.position.z = 45; // Pull back for tablets
+            } else {
+                camera.position.z = 30; // Original desktop
+            }
+        };
+        updateCameraPos();
+
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
+            updateCameraPos();
         });
 
         // Hide splash screen after 4.5 seconds to appreciate the 3D anim
